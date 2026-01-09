@@ -11,3 +11,5 @@ python3 odds_ev.py
 ## Example
 American odds: -110
 Win probability: 0.55
+
+Day 3: batch mode script supports --bankroll, --kelly-scale, and outputs plus_ev.csv.

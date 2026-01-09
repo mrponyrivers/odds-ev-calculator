@@ -1,4 +1,0 @@
-bet_name,american_odds,win_prob,decimal_odds,implied_prob,ev_per_1,decision
-Game1,-110,0.55,1.9091,0.5238,0.05,+EV
-Game2,150,0.42,2.5,0.4,0.05,+EV
-Game3,-200,0.7,1.5,0.6667,0.05,+EV

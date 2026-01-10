@@ -74,19 +74,23 @@ st.divider()
 
 if not uploaded:
     st.info("Upload a CSV with headers: bet_name, american_odds, win_prob")
-    st.code("bet_name,american_odds,win_prob\nGame1,-110,0.55\nGame2,150,0.42")
+    st.code("bet_name,american_odds,win_prob\nGame1,-110,0.55\nGame2,150,0.42\nGame3,-200,0.70")
     st.stop()
 
 # Read CSV
 try:
     df_in = pd.read_csv(uploaded)
-st.info(f"DEBUG: uploaded file name = {uploaded.name}")
-st.info(f"DEBUG: uploaded file size (bytes) = {uploaded.size}")
-st.info(f"DEBUG: rows read = {len(df_in)}")
-st.write("DEBUG: bet_name values:", list(df_in["bet_name"].astype(str)))
 except Exception as e:
     st.error(f"Could not read CSV: {e}")
     st.stop()
+
+# --- DEBUG (temporary): proves what file Streamlit received ---
+st.info(f"DEBUG: uploaded file name = {uploaded.name}")
+st.info(f"DEBUG: uploaded file size (bytes) = {uploaded.size}")
+st.info(f"DEBUG: rows read = {len(df_in)}")
+if "bet_name" in df_in.columns:
+    st.write("DEBUG: bet_name values:", list(df_in["bet_name"].astype(str)))
+# ------------------------------------------------------------
 
 required = {"bet_name", "american_odds", "win_prob"}
 if not required.issubset(set(df_in.columns)):
@@ -202,5 +206,3 @@ with c3:
 
 st.subheader("Report preview")
 st.code(report_md, language="markdown")
-DM
-ç

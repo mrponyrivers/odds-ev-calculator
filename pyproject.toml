@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "odds-ev-tool"
+version = "0.1.0"
+description = "CLI tool to compute EV, edge, and recommended stake from American odds."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Pony Rivers"}]
+
+[project.scripts]
+odds-ev = "odds_ev_tool.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -80,6 +80,10 @@ if not uploaded:
 # Read CSV
 try:
     df_in = pd.read_csv(uploaded)
+st.info(f"DEBUG: uploaded file name = {uploaded.name}")
+st.info(f"DEBUG: uploaded file size (bytes) = {uploaded.size}")
+st.info(f"DEBUG: rows read = {len(df_in)}")
+st.write("DEBUG: bet_name values:", list(df_in["bet_name"].astype(str)))
 except Exception as e:
     st.error(f"Could not read CSV: {e}")
     st.stop()

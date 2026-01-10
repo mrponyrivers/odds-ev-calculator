@@ -1,10 +1,18 @@
-import io
+cat > app.py <<'PY'
+import sys
+from pathlib import Path
 from datetime import datetime
 
 import pandas as pd
 import streamlit as st
 
-from odds_ev_tool.core import (
+# --- Make imports work on Streamlit Cloud (and locally) ---
+ROOT = Path(__file__).resolve().parent
+SRC = ROOT / "src"
+if SRC.exists() and str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from odds_ev_tool.core import (  # noqa: E402
     american_to_decimal,
     compute_row,
     kelly_fraction,
@@ -134,7 +142,10 @@ cols = [
 ]
 df_out = df_out.reindex(columns=[c for c in cols if c in df_out.columns])
 
-df_plus = df_out[df_out["ev_per_1"].apply(lambda x: isinstance(x, float)) & (df_out["ev_per_1"] >= float(min_ev))].copy()
+df_plus = df_out[
+    df_out["ev_per_1"].apply(lambda x: isinstance(x, float)) &
+    (df_out["ev_per_1"] >= float(min_ev))
+].copy()
 
 # Summary stats
 valid_ev = df_out["ev_per_1"].dropna()
@@ -188,3 +199,4 @@ with c3:
 
 st.subheader("Report preview")
 st.code(report_md, language="markdown")
+PY

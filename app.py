@@ -1,4 +1,3 @@
-cat > app.py <<'PY'
 import sys
 from pathlib import Path
 from datetime import datetime
@@ -199,4 +198,3 @@ with c3:
 
 st.subheader("Report preview")
 st.code(report_md, language="markdown")
-PY

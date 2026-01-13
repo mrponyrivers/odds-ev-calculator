@@ -25,4 +25,4 @@ bet_name,american_odds,win_prob
 Game1,-110,0.55
 Game2,150,0.42
 Game3,-200,0.70
-MD
+

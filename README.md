@@ -1,15 +1,28 @@
-# Odds + EV Calculator (Day 1)
+cd ~/ai-journey/odds-ev-calculator
 
-A tiny Python script that:
-- Converts American odds (e.g., -110 / +150) to decimal odds
-- Calculates implied probability
-- Calculates EV (expected value) per $1 staked using your win probability
+cat > README.md <<'MD'
+# Odds + EV Calculator (CLI + Web App)
 
-## Run
-python3 odds_ev.py
+A small Python tool that:
+- Converts **American odds** (e.g., `-110` / `+150`) to **decimal odds**
+- Computes **implied probability**, **edge**, and **EV per $1 staked**
+- Suggests a **Kelly-scaled recommended stake** (with a max stake cap)
+- Works as both:
+  - a **CSV CLI tool** (input CSV → output CSV + report)
+  - a **Streamlit web app** (upload CSV → download results)
 
-## Example
-American odds: -110
-Win probability: 0.55
+## Live Demo (Web App)
+https://odds-ev-calculator-ponyrivers.streamlit.app/
 
-Day 3: batch mode script supports --bankroll, --kelly-scale, and outputs plus_ev.csv.
+---
+
+## CSV Input Format
+
+Your input CSV must have these headers:
+
+```csv
+bet_name,american_odds,win_prob
+Game1,-110,0.55
+Game2,150,0.42
+Game3,-200,0.70
+MD

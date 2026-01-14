@@ -1,6 +1,4 @@
-cd ~/ai-journey/odds-ev-calculator
 
-cat > README.md <<'MD'
 # Odds + EV Calculator (CLI + Web App)
 
 A small Python tool that:

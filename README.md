@@ -2,6 +2,7 @@
 
 **Live app:** https://odds-ev-calculator-ponyrivers.streamlit.app/
 
+
 A small Python tool that:
 - Converts **American odds** (e.g., `-110` / `+150`) to **decimal odds**
 - Computes **implied probability**, **edge**, and **EV per $1 staked**
@@ -10,8 +11,8 @@ A small Python tool that:
   - a **CSV CLI tool** (input CSV → output CSV + report)
   - a **Streamlit web app** (upload CSV → download results)
 
-## Screenshot
-![App screenshot](PUT_YOUR_SCREENSHOT_FILENAME_HERE)
+![App screenshot](app_screenshot.png)
+
 
 ## Architecture
 - **Web App (Streamlit):** `app.py` (upload CSV → view results → download outputs)
@@ -28,3 +29,4 @@ bet_name,american_odds,win_prob
 Game1,-110,0.55
 Game2,150,0.42
 Game3,-200,0.70
+```

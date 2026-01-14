@@ -1,5 +1,6 @@
 
 # Odds + EV Calculator (CLI + Web App)
+**Live app:** https://odds-ev-calculator-ponyrivers.streamlit.app/
 
 A small Python tool that:
 - Converts **American odds** (e.g., `-110` / `+150`) to **decimal odds**
@@ -13,6 +14,12 @@ A small Python tool that:
 https://odds-ev-calculator-ponyrivers.streamlit.app/
 ## Screenshot
 ![App screenshot](PUT_THE_EXACT_FILENAME_HERE)
+## Architecture
+- **Web App (Streamlit)**: `app.py` (upload CSV → view results → download outputs)
+- **Core logic**: `src/odds_ev_tool/core.py` (odds conversion, implied prob, EV, Kelly sizing)
+- **CLI**: `src/odds_ev_tool/cli.py` (batch CSV processing + report.md)
+## Tech
+Python • Streamlit • pandas • CSV I/O • Git/GitHub
 
 ---
 

@@ -11,6 +11,8 @@ A small Python tool that:
 
 ## Live Demo (Web App)
 https://odds-ev-calculator-ponyrivers.streamlit.app/
+## Screenshot
+![App screenshot](PUT_THE_EXACT_FILENAME_HERE)
 
 ---
 

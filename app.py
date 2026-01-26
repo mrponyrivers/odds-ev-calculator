@@ -205,4 +205,4 @@ with c3:
     st.download_button("Download report.md", data=report_md.encode("utf-8"), file_name="report.md", mime="text/markdown")
 
 st.subheader("Report preview")
-st.code(report_md, language="markdown")
+st.code(report_md, 

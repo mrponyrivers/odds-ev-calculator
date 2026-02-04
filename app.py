@@ -59,6 +59,22 @@ st.set_page_config(page_title="Odds EV Tool", page_icon="📈", layout="wide")
 st.title("📈 Odds EV Tool — Web App")
 st.caption("Upload bets.csv → get results + plus_ev + report. (Built from your CLI tool.)")
 
+# --- Instant demo: sample CSV download ---
+SAMPLE_CSV = (
+    "bet_name,american_odds,win_prob\n"
+    "Example A,-110,0.55\n"
+    "Example B,150,0.42\n"
+    "Example C,-200,0.70\n"
+)
+
+st.download_button(
+    "⬇️ Download sample bets.csv",
+    data=SAMPLE_CSV.encode("utf-8"),
+    file_name="bets.csv",
+    mime="text/csv",
+    use_container_width=True,
+)
+
 uploaded = st.file_uploader("Upload bets.csv", type=["csv"])
 
 with st.sidebar:
@@ -73,7 +89,8 @@ with st.sidebar:
 st.divider()
 
 if not uploaded:
-    st.info("Upload a CSV with headers: bet_name, american_odds, win_prob")
+    st.info("Instant demo: click **⬇️ Download sample bets.csv**, then upload it here.")
+    st.info("CSV must have headers: bet_name, american_odds, win_prob")
     st.code("bet_name,american_odds,win_prob\nGame1,-110,0.55\nGame2,150,0.42\nGame3,-200,0.70")
     st.stop()
 
@@ -83,14 +100,6 @@ try:
 except Exception as e:
     st.error(f"Could not read CSV: {e}")
     st.stop()
-
-# --- DEBUG (temporary): proves what file Streamlit received ---
-st.info(f"DEBUG: uploaded file name = {uploaded.name}")
-st.info(f"DEBUG: uploaded file size (bytes) = {uploaded.size}")
-st.info(f"DEBUG: rows read = {len(df_in)}")
-if "bet_name" in df_in.columns:
-    st.write("DEBUG: bet_name values:", list(df_in["bet_name"].astype(str)))
-# ------------------------------------------------------------
 
 required = {"bet_name", "american_odds", "win_prob"}
 if not required.issubset(set(df_in.columns)):
@@ -126,32 +135,40 @@ for _, r in df_in.iterrows():
 
     except Exception as e:
         errors += 1
-        rows.append({
-            "bet_name": r.get("bet_name", ""),
-            "american_odds": r.get("american_odds", ""),
-            "win_prob": r.get("win_prob", ""),
-            "decimal_odds": "",
-            "implied_prob": "",
-            "edge": "",
-            "ev_per_1": "",
-            "kelly_fraction": "",
-            "rec_stake": "",
-            "decision": f"ERROR: {e}",
-        })
+        rows.append(
+            {
+                "bet_name": r.get("bet_name", ""),
+                "american_odds": r.get("american_odds", ""),
+                "win_prob": r.get("win_prob", ""),
+                "decimal_odds": "",
+                "implied_prob": "",
+                "edge": "",
+                "ev_per_1": "",
+                "kelly_fraction": "",
+                "rec_stake": "",
+                "decision": f"ERROR: {e}",
+            }
+        )
 
 df_out = pd.DataFrame(rows)
 
 # Ensure column order
 cols = [
-    "bet_name", "american_odds", "win_prob",
-    "decimal_odds", "implied_prob", "edge", "ev_per_1",
-    "kelly_fraction", "rec_stake", "decision"
+    "bet_name",
+    "american_odds",
+    "win_prob",
+    "decimal_odds",
+    "implied_prob",
+    "edge",
+    "ev_per_1",
+    "kelly_fraction",
+    "rec_stake",
+    "decision",
 ]
 df_out = df_out.reindex(columns=[c for c in cols if c in df_out.columns])
 
 df_plus = df_out[
-    df_out["ev_per_1"].apply(lambda x: isinstance(x, float)) &
-    (df_out["ev_per_1"] >= float(min_ev))
+    df_out["ev_per_1"].apply(lambda x: isinstance(x, float)) & (df_out["ev_per_1"] >= float(min_ev))
 ].copy()
 
 # Summary stats
@@ -205,4 +222,4 @@ with c3:
     st.download_button("Download report.md", data=report_md.encode("utf-8"), file_name="report.md", mime="text/markdown")
 
 st.subheader("Report preview")
-st.code(report_md,language="markdown")
+st.code(report_md, language="markdown")

@@ -10,7 +10,7 @@ A small Python tool that:
 
 ## Live Demo (Web App)
 https://odds-ev-calculator-ponyrivers.streamlit.app/
-
+**Instant demo:** click **⬇️ Download sample bets.csv**, then upload it back into the app.
 ---
 
 ## CSV Input Format
